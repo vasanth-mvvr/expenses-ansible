@@ -1,0 +1,19 @@
+- name: database file expenses
+  hosts: web
+  vars_prompt:
+  - name: my_root_password
+    prompt: Please enter the password
+    private: no
+  tasks:
+    - name: installation of mysql server
+      ansible.builtin.dnf:
+        name: mysqld
+        state: latest
+    - name: starting and enable of mysql server 
+      ansible.builtin.service:
+        name: mysqld
+        state: started
+        enabled: yes
+    
+    - name: setting up the root password
+      ansible.builtin.command: sql_secure_installation --set-root-pass {{my_root_password}}
