@@ -7,6 +7,8 @@
   # - name: my_root_password
   #   prompt: Please enter the password
   #   private: no
+  vars:
+    login_host: 172.31.88.113
   tasks:
     - name: installation of mysql server
       ansible.builtin.dnf:
@@ -17,11 +19,17 @@
         name: mysqld
         state: started
         enabled: yes
+    # - name: installation of pip
+    #   ansible.builtin.pip:
+    #     name:
+    #       - PyMySQL
+    #       - cryptography 
+    #     executable: pip3.9
     - name: check DB connection
       community.mysql.mysql_info:
         login_user: root
         login_password: ExpenseApp@1
-        login_host: 172.31.88.113
+        login_host: {{login_host}}
         filter: version
       ignore_errors: yes
       register: database_connection_output
