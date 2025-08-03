@@ -1,1 +1,12 @@
+  - name: Backend setup
+    hosts: backend
+    become: yes
+    tasks:
+    - name: disable the nodejs 
+      ansible.builtin.dnf:
+        disabled: yes
+        enabled: yes:18
+        state: latest
+
+  
 
