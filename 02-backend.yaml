@@ -1,6 +1,14 @@
   - name: Backend setup
     hosts: backend
     become: yes
+    vars:
+      login_host: 
+      login_password: ExpenseApp@1
+    # vars_prompt:
+    #   name: my_root_password
+    #   prompt: Please enter your password
+    #   private: no
+
     tasks:
     - name: disable the nodejs 
       ansible.builtin.command: dnf module disable nodejs -y
@@ -47,7 +55,12 @@
         src: /tmp/backend.zip
         dest: /etc/systemd/system/backend.service
       
-    - name: 
+    - name: checking database connection 
+      community.mysql.mysql_info:
+        login_user: root
+        login_password: "{{my_root_password}}"
+        login_host: "{{login_host}}"
+
     
     
       
