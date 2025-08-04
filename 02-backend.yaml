@@ -8,7 +8,7 @@
     - name: enable the nodejs 
       ansible.builtin.command: dnf module enable nodejs:20 -y
    
-    - name: install nodejs
+    - name: install nodejs and mysql
       ansible.builtin.dnf:
         name: "{{item}}"
         state: installed
@@ -34,6 +34,19 @@
       ansible.builtin.command: npm install
       args:
         chdir: /app
+
+    - name: installing mysql db depensencies
+      ansible.builtin.pip:
+        - PyMySQL
+        - cryptography
+      executable: pip3.9
+      
+    - name: copying backend service
+      ansible.builtin.copy:
+        src: /tmp/backend.zip
+        dest: /etc/systemd/system/backend.service
+      
+    - name: 
     
     
       
