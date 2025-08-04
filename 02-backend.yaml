@@ -37,10 +37,11 @@
 
     - name: installing mysql db depensencies
       ansible.builtin.pip:
-        - PyMySQL
-        - cryptography
+        name:
+          - PyMySQL
+          - cryptography
       executable: pip3.9
-      
+
     - name: copying backend service
       ansible.builtin.copy:
         src: /tmp/backend.zip
