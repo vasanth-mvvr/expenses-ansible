@@ -21,7 +21,20 @@
         src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
         dest: /tmp/frontend.zip
 
-    
+    - name: unzip the code
+      ansible.builtin.unarchive:
+        src: /tmp/frontend.zip
+        dest: /usr/share/nginx/html
 
+    - name: reverse proxy configuration
+      ansible.builtin.copy:
+        src: expense.conf
+        dest: /etc/nginx/default.d/expense.conf
+      
+    - name : restart nginx
+      ansible.builtin.service:
+        state: restarted
+        enabled: yes
+      
 
     
