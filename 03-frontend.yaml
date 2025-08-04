@@ -13,7 +13,7 @@
         enabled: yes
     - name: Removing the default content
       ansible.builtin.file:
-        path: /usr/share/nginx/html*
+        path: /usr/share/nginx/html/*
         state: absent
 
     - name: download the code
