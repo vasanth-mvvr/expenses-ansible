@@ -3,10 +3,41 @@
     become: yes
     tasks:
     - name: disable the nodejs 
+      ansible.builtin.command: dnf module disable nodejs -y
+   
+    - name: enable the nodejs 
+      ansible.builtin.command: dnf module enable nodejs:20 -y
+   
+    - name: install nodejs
       ansible.builtin.dnf:
-        disabled: yes
-        enabled: yes:18
-        state: latest
+        name: "{{item}}"
+        state: installed
+      loop:
+      - nodejs
+      - mysql
+    
+    - name: add the user
+      ansible.builtin.user:
+        name: expense
+    
+    - name: create a directory
+      ansible.builtin.file:
+        path: /app
+        state: directory
+    
+    - name: downloading the code
+      ansible.builtin.get_url:
+        src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+        dest: /tmp/backend.zip
+        
+    - name: installing the dependencies in the /app directory
+      ansible.builtin.command: npm install
+      args:
+        chdir: /app
+    
+    
+      
 
-  
+        
+
 
