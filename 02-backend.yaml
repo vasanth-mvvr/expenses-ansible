@@ -57,7 +57,7 @@
 
     - name: copying backend service
       ansible.builtin.copy:
-        src: /tmp/backend.zip
+        src: backend.service
         dest: /etc/systemd/system/backend.service
       
     - name: checking database connection 
@@ -75,7 +75,7 @@
     
     - name: restart the servers
       ansible.builtin.service:
-        name: mysql
+        name: backend
         state: restarted
         enabled: yes
 
