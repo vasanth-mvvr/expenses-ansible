@@ -13,36 +13,36 @@
         state: started
         enabled: yes
 
-    - name: Removing the default content
-      ansible.builtin.file:
-        path: /usr/share/nginx/html
-        state: absent
+    # - name: Removing the default content
+    #   ansible.builtin.file:
+    #     path: /usr/share/nginx/html
+    #     state: absent
     
-    - name: create a directory
-      ansible.builtin.file:
-        path: /usr/share/nginx/html
-        state: directory
+    # - name: create a directory
+    #   ansible.builtin.file:
+    #     path: /usr/share/nginx/html
+    #     state: directory
 
-    - name: download the code
-      ansible.builtin.get_url:
-        url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
-        dest: /tmp/frontend.zip
+    # - name: download the code
+    #   ansible.builtin.get_url:
+    #     url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+    #     dest: /tmp/frontend.zip
 
-    - name: unzip the code
-      ansible.builtin.unarchive:
-        src: /tmp/frontend.zip
-        dest: /usr/share/nginx/html
+    # - name: unzip the code
+    #   ansible.builtin.unarchive:
+    #     src: /tmp/frontend.zip
+    #     dest: /usr/share/nginx/html
 
-    - name: reverse proxy configuration
-      ansible.builtin.copy:
-        src: expense.conf
-        dest: /etc/nginx/default.d/expense.conf
+    # - name: reverse proxy configuration
+    #   ansible.builtin.copy:
+    #     src: expense.conf
+    #     dest: /etc/nginx/default.d/expense.conf
       
-    - name : restart nginx
-      ansible.builtin.service:
-        name: nginx
-        state: restarted
-        enabled: yes
+    # - name : restart nginx
+    #   ansible.builtin.service:
+    #     name: nginx
+    #     state: restarted
+    #     enabled: yes
       
 
     
