@@ -6,7 +6,7 @@
     prompt: Please enter the password
     private: no
   vars:
-    login_host: 172.31.92.96
+    login_host: 172.31.85.227
   tasks:
     - name: installation of mysql server
       ansible.builtin.dnf:
