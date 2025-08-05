@@ -2,7 +2,7 @@
     hosts: backend
     become: yes
     vars:
-      login_host: 172.31.85.227  
+      login_host: db.vasanthreddy.space 
       login_password: ExpenseApp@1
     # vars_prompt:
     #   name: my_root_password

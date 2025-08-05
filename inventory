@@ -1,8 +1,8 @@
 [db]
-172.31.85.227
+db.vasanthreddy.space
 
 [backend]
- 172.31.95.107 
+ backend.vasanthreddy.space
 
 [frontend]
 172.31.95.177
