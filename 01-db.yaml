@@ -1,12 +1,21 @@
 - name: database file expenses
   hosts: db
   become: yes
+<<<<<<< HEAD
   # vars: 
   #   login_host: 172.31.28.22
   # vars_prompt:
   # - name: my_root_password
   #   prompt: Please enter the password
   #   private: no
+=======
+  vars_prompt:
+  - name: my_root_password
+    prompt: Please enter the password
+    private: no
+  vars:
+    login_host: db.vasanthreddy.space
+>>>>>>> 19aaefc649511b2c95f567d76cfcd6b1690d3b66
   tasks:
     - name: installation of mysql server
       ansible.builtin.dnf:
@@ -17,11 +26,26 @@
         name: mysqld
         state: started
         enabled: yes
+<<<<<<< HEAD
     - name: check DB connection
       community.mysql.mysql_info:
         login_user: root
         login_password: ExpenseApp@1
         login_host: 172.31.28.22
+=======
+    - name: installation of pip
+      ansible.builtin.pip:
+        name:
+          - PyMySQL
+          - cryptography 
+        executable: pip3.9
+
+    - name: check DB connection
+      community.mysql.mysql_info:
+        login_user: root
+        login_password: "{{my_root_password}}"
+        login_host: "{{login_host}}"
+>>>>>>> 19aaefc649511b2c95f567d76cfcd6b1690d3b66
         filter: version
       ignore_errors: yes
       register: database_connection_output
@@ -30,5 +54,11 @@
       ansible.builtin.debug:
         msg: "The error is: {{database_connection_output}}"
 
+<<<<<<< HEAD
     # - name: setting up the root password
     #   ansible.builtin.command: sql_secure_installation --set-root-pass {{my_root_password}}
+=======
+    - name: setting up the root password
+      ansible.builtin.command: "mysql_secure_installation --set-root-pass {{my_root_password}}"
+      when: database_connection_output.failed is true
+>>>>>>> 19aaefc649511b2c95f567d76cfcd6b1690d3b66

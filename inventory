@@ -1,2 +1,12 @@
 [db]
+<<<<<<< HEAD
 172.31.28.22
+=======
+db.vasanthreddy.space
+
+[backend]
+ backend.vasanthreddy.space
+
+[frontend]
+172.31.95.177
+>>>>>>> 19aaefc649511b2c95f567d76cfcd6b1690d3b66
